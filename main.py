@@ -3,12 +3,13 @@ import requests
 from dotenv import load_dotenv
 
 
-def main():
-    load_dotenv()
+def get_games():
     token = os.getenv('API_KEY')
     payload = {
         'key': token,
-        'genres': 'strategy'
+        'genres': 'strategy',
+        'page_size': 10,
+        'metacritic': 100,
     }
     url = 'https://api.rawg.io/api/games'
     response = requests.get(url, params=payload)
@@ -23,6 +24,11 @@ def main():
         print(f'Название игры: {game_name}')
         print(f'Дата выхода: {date_released}')
         print(f'Ссылка на игру: {game_url}\n')
+
+
+def main():
+    load_dotenv()
+    get_games()
 
 
 if __name__ == "__main__":
